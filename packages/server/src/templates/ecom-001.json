@@ -1,0 +1,58 @@
+{
+  "companyId": "ecom-001",
+  "name": "ร้านขายดี Shop",
+  "type": "ecommerce",
+  "departments": ["Marketing", "Sales", "CustomerSupport", "Operations", "QA"],
+  "agents": [
+    {
+      "id": "agent-mkt-01",
+      "name": "น้องมาร์ค",
+      "role": "Content Creator",
+      "department": "Marketing",
+      "llm": "local/gemma-4b",
+      "fallback_llm": "openai/gpt-4o",
+      "skills": ["write_thai_caption", "search_trends", "post_facebook"],
+      "memory": true,
+      "rag_collection": "brand_guidelines",
+      "schedule": "*/30 * * * *",
+      "productivity_threshold": 3
+    },
+    {
+      "id": "agent-qa-01",
+      "name": "พี่ตรวจ",
+      "role": "QA Agent",
+      "department": "QA",
+      "llm": "local/gemma-4b",
+      "fallback_llm": "openai/gpt-4o",
+      "skills": ["review_content", "check_quality", "give_feedback"],
+      "memory": true,
+      "schedule": "*/45 * * * *",
+      "productivity_threshold": 3
+    },
+    {
+      "id": "agent-analytics-01",
+      "name": "หมอตัวเลข",
+      "role": "Analytics Agent",
+      "department": "Operations",
+      "llm": "local/gemma-4b",
+      "fallback_llm": "openai/gpt-4o",
+      "skills": ["fetch_sales_data", "analyze_performance", "generate_report"],
+      "memory": true,
+      "rag_collection": "sales_history",
+      "schedule": "0 9 * * *",
+      "productivity_threshold": 3
+    },
+    {
+      "id": "agent-mgr-01",
+      "name": "ผู้จัดการ",
+      "role": "Manager Agent",
+      "department": "Operations",
+      "llm": "local/gemma-4b",
+      "fallback_llm": "openai/gpt-4o",
+      "skills": ["review_reports", "update_strategy", "delegate_tasks"],
+      "memory": true,
+      "schedule": "0 10 * * *",
+      "productivity_threshold": 2
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "baseUrl": ".",
+    "paths": {
+      "@empire/agent-engine": ["packages/core/agent-engine/src/index.ts"],
+      "@empire/memory": ["packages/core/memory/src/index.ts"],
+      "@empire/scheduler": ["packages/core/scheduler/src/index.ts"],
+      "@empire/llm-client": ["packages/core/llm-client/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "dist", "**/*.test.ts"]
+}

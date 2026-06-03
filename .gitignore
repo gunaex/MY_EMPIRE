@@ -1,0 +1,31 @@
+# Node.js
+node_modules/
+dist/
+*.js.map
+
+# Env files (keep examples, ignore actual secrets)
+.env
+!.env.example
+!.env.notebook
+!.env.server
+
+# Data
+data/
+*.sqlite
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+build/
+coverage/
+
+# TypeScript/Vite emitted config artifacts
+packages/ui/vite.config.js
+packages/ui/vite.config.d.ts
+packages/ui/vite.config.d.ts.map

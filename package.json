@@ -1,0 +1,33 @@
+{
+  "name": "agent-empire",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pixel-art multi-agent office empire — 1 person operating a 10-person team",
+  "workspaces": [
+    "packages/core/agent-engine",
+    "packages/core/memory",
+    "packages/core/scheduler",
+    "packages/core/llm-client",
+    "packages/adapters/lm-studio",
+    "packages/adapters/litellm",
+    "packages/adapters/webhook",
+    "packages/server",
+    "packages/ui"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:ui\"",
+    "dev:server": "npm run dev --workspace=packages/server",
+    "dev:ui": "npm run dev --workspace=packages/ui",
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "eslint packages --ext .ts,.tsx",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.0",
+    "tsx": "^4.22.4",
+    "typescript": "^5.4.5"
+  }
+}

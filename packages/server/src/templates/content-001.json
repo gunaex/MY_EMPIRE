@@ -1,0 +1,33 @@
+{
+  "companyId": "content-001",
+  "name": "คอนเทนต์สตูดิโอ",
+  "type": "content_studio",
+  "departments": ["Creative", "Distribution", "Analytics"],
+  "agents": [
+    {
+      "id": "agent-writer-01",
+      "name": "น้องเขียน",
+      "role": "Content Writer",
+      "department": "Creative",
+      "llm": "local/gemma-4b",
+      "fallback_llm": "anthropic/claude-sonnet",
+      "skills": ["write_article", "write_caption", "research_topic"],
+      "memory": true,
+      "rag_collection": "content_guidelines",
+      "schedule": "0 */2 * * *",
+      "productivity_threshold": 3
+    },
+    {
+      "id": "agent-dist-01",
+      "name": "น้องโพสต์",
+      "role": "Distribution Agent",
+      "department": "Distribution",
+      "llm": "local/gemma-4b",
+      "fallback_llm": "openai/gpt-4o",
+      "skills": ["post_facebook", "post_tiktok", "post_instagram", "schedule_content"],
+      "memory": true,
+      "schedule": "0 8,12,18 * * *",
+      "productivity_threshold": 3
+    }
+  ]
+}

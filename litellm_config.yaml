@@ -1,0 +1,38 @@
+model_list:
+  - model_name: local/lm-studio
+    litellm_params:
+      model: openai/gemma-4b
+      api_base: http://127.0.0.1:1234/v1
+      api_key: lm-studio
+
+  - model_name: local/ollama
+    litellm_params:
+      model: ollama/llama3
+      api_base: http://localhost:11434
+
+  - model_name: openai/gpt-4o
+    litellm_params:
+      model: gpt-4o
+      api_key: os.environ/OPENAI_API_KEY
+
+  - model_name: anthropic/claude-sonnet
+    litellm_params:
+      model: claude-sonnet-4-5
+      api_key: os.environ/ANTHROPIC_API_KEY
+
+  - model_name: google/gemini-pro
+    litellm_params:
+      model: gemini/gemini-1.5-pro
+      api_key: os.environ/GEMINI_API_KEY
+
+router_settings:
+  fallbacks:
+    - local/lm-studio:
+        - openai/gpt-4o
+    - local/ollama:
+        - anthropic/claude-sonnet
+  context_window_fallbacks:
+    - local/lm-studio:
+        - anthropic/claude-sonnet
+  num_retries: 3
+  timeout: 30
