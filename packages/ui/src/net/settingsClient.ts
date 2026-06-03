@@ -1,4 +1,4 @@
-export type LLMProvider = 'lm_studio' | 'ollama' | 'litellm' | 'openai' | 'custom'
+export type LLMProvider = 'lm_studio' | 'ollama' | 'litellm' | 'openai' | 'chatgpt' | 'gemini' | 'claude' | 'custom'
 
 export interface PublicLLMSettings {
   provider: LLMProvider

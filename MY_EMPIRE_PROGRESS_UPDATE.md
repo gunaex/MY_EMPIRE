@@ -14,7 +14,7 @@ Session focus: Phase 1 live multi-company wiring + GitHub repo setup + Docker de
 | Phase 4 Shadow PM | 20% | Started | No direct Shadow PM changes this session |
 | Phase 5 Polish & Scale | 5% | Not started | Build cleanup helps future polish but no product polish pass yet |
 | Deployment | 55% | In progress | Added Dockerfiles, Compose hardening, AI server env networking, and deployment guide |
-| Runtime LLM Settings | 65% | In progress | Added backend settings API, persisted routing config, frontend Settings view, and test endpoint |
+| Runtime LLM Settings | 72% | In progress | Added backend settings API, persisted routing config, frontend Settings view, provider presets, model dropdowns, and test endpoint |
 
 Overall estimated completion: 38%
 
@@ -30,6 +30,7 @@ Overall estimated completion: 38%
   - Backend `POST /api/settings/llm/test`
   - Persisted settings at `./data/llm-settings.json` by default
   - Frontend `Settings` view with LM Studio, Ollama, LiteLLM, OpenAI, and Custom presets
+  - Added ChatGPT, Gemini, and Claude provider/model selectors
   - OfficeRoom now creates LLM clients from the shared runtime settings store
 - Added Docker deployment path for AI server migration:
   - root server `Dockerfile`

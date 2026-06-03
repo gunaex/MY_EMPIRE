@@ -306,6 +306,11 @@ body {
   font-size: 0.9rem;
   min-height: 1.4rem;
 }
+.settings-note {
+  margin-top: 1rem;
+  color: var(--accent-yellow);
+  font-size: 0.85rem;
+}
 
 /* Shadow PM Dashboard */
 .shadow-pm-dash { padding: 2rem; max-width: 800px; margin: 0 auto; }

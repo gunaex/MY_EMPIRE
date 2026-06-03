@@ -2,7 +2,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import { dirname, resolve } from 'path'
 import { LLMClient, type LLMClientConfig } from '@empire/llm-client'
 
-export type LLMProvider = 'lm_studio' | 'ollama' | 'litellm' | 'openai' | 'custom'
+export type LLMProvider = 'lm_studio' | 'ollama' | 'litellm' | 'openai' | 'chatgpt' | 'gemini' | 'claude' | 'custom'
 
 export interface LLMSettings {
   provider: LLMProvider
@@ -27,7 +27,7 @@ export interface LLMSettingsInput {
   timeoutMs?: number
 }
 
-const providers: LLMProvider[] = ['lm_studio', 'ollama', 'litellm', 'openai', 'custom']
+const providers: LLMProvider[] = ['lm_studio', 'ollama', 'litellm', 'openai', 'chatgpt', 'gemini', 'claude', 'custom']
 
 function settingsPath(): string {
   return resolve(process.env['LLM_SETTINGS_PATH'] ?? './data/llm-settings.json')

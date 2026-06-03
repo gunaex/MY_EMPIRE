@@ -79,6 +79,7 @@ Runtime AI model settings:
 
 - Open the app UI, then click `Settings`.
 - Choose LM Studio, Ollama, LiteLLM Proxy, OpenAI, or Custom.
+- Extra selectable providers include ChatGPT-style OpenAI models, Gemini, and Claude.
 - Save to update backend routing for new agent rooms.
 - Test to call the configured model through the same backend LLM client path.
 
@@ -88,7 +89,7 @@ Direct API:
 - `PUT /api/settings/llm`
 - `POST /api/settings/llm/test`
 
-For Anthropic/Gemini or mixed cloud/local fallback, route through LiteLLM and set the Settings base URL to the LiteLLM OpenAI-compatible endpoint.
+Gemini can use Google's OpenAI-compatible endpoint directly. Claude should currently route through LiteLLM because AgentEmpire's active LLM client uses the OpenAI-compatible chat completions shape.
 
 ## 📖 Docs
 
