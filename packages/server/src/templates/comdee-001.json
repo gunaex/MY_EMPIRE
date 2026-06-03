@@ -1,0 +1,84 @@
+{
+  "companyId": "comdee-001",
+  "name": "คอมดี",
+  "type": "custom",
+  "departments": ["Product", "Architecture", "Engineering", "QA"],
+  "agents": [
+    {
+      "id": "agent-comdee-pm-01",
+      "name": "MR.P",
+      "role": "Product Manager",
+      "department": "Product",
+      "llm": "litellm/auto-router",
+      "fallback_llm": "local/llama3",
+      "skills": [
+        "define_ai_use_cases",
+        "map_model_costs",
+        "write_acceptance_criteria",
+        "manage_token_budget",
+        "define_guardrails"
+      ],
+      "memory": true,
+      "rag_collection": "comdee_product_requirements",
+      "schedule": "0 8 * * *",
+      "productivity_threshold": 3
+    },
+    {
+      "id": "agent-comdee-tl-01",
+      "name": "Miss T",
+      "role": "Technical Lead",
+      "department": "Architecture",
+      "llm": "litellm/auto-router",
+      "fallback_llm": "local/qwen2.5-coder",
+      "skills": [
+        "design_ai_gateway",
+        "configure_litellm_proxy",
+        "design_fallback_routing",
+        "secure_api_keys",
+        "review_architecture"
+      ],
+      "memory": true,
+      "rag_collection": "comdee_architecture_decisions",
+      "schedule": "0 9 * * *",
+      "productivity_threshold": 3
+    },
+    {
+      "id": "agent-comdee-dev-01",
+      "name": "Miss PG",
+      "role": "Programmer",
+      "department": "Engineering",
+      "llm": "litellm/auto-router",
+      "fallback_llm": "local/qwen2.5-coder",
+      "skills": [
+        "implement_ai_gateway_client",
+        "write_structured_prompts",
+        "build_rag_pipeline",
+        "handle_streaming_json",
+        "create_audit_logs"
+      ],
+      "memory": true,
+      "rag_collection": "comdee_codebase",
+      "schedule": "*/30 * * * *",
+      "productivity_threshold": 3
+    },
+    {
+      "id": "agent-comdee-qa-01",
+      "name": "MR.Q",
+      "role": "QA Engineer",
+      "department": "QA",
+      "llm": "litellm/auto-router",
+      "fallback_llm": "local/gemma-4b",
+      "skills": [
+        "test_llm_payloads",
+        "benchmark_provider_latency",
+        "run_prompt_injection_tests",
+        "build_eval_dataset",
+        "validate_model_parity"
+      ],
+      "memory": true,
+      "rag_collection": "comdee_eval_reports",
+      "schedule": "0 */2 * * *",
+      "productivity_threshold": 3
+    }
+  ]
+}

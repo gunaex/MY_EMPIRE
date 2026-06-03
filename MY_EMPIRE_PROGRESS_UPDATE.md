@@ -1,7 +1,7 @@
 # MY_EMPIRE Progress Update
 
 Last updated: 2026-06-03
-Session focus: Phase 1 live multi-company wiring + GitHub repo setup + Docker deployment prep + local test run + runtime LLM settings
+Session focus: Phase 1 live multi-company wiring + GitHub repo setup + Docker deployment prep + local test run + runtime LLM settings + Comdee company template
 
 ## Phase Progress
 
@@ -15,6 +15,7 @@ Session focus: Phase 1 live multi-company wiring + GitHub repo setup + Docker de
 | Phase 5 Polish & Scale | 5% | Not started | Build cleanup helps future polish but no product polish pass yet |
 | Deployment | 55% | In progress | Added Dockerfiles, Compose hardening, AI server env networking, and deployment guide |
 | Runtime LLM Settings | 72% | In progress | Added backend settings API, persisted routing config, frontend Settings view, provider presets, model dropdowns, and test endpoint |
+| Company Templates | 70% | In progress | Added Comdee software house company template with PM, Tech Lead, Programmer, and QA agents |
 
 Overall estimated completion: 38%
 
@@ -32,6 +33,14 @@ Overall estimated completion: 38%
   - Frontend `Settings` view with LM Studio, Ollama, LiteLLM, OpenAI, and Custom presets
   - Added ChatGPT, Gemini, and Claude provider/model selectors
   - OfficeRoom now creates LLM clients from the shared runtime settings store
+- Added company template `comdee-001`:
+  - Company name: `คอมดี`
+  - Type: `custom`
+  - PM: `MR.P`
+  - Tech Lead: `Miss T`
+  - Programmer: `Miss PG`
+  - QA: `MR.Q`
+  - Purpose: software house team for Enterprise AI Gateway / LiteLLM orchestration work
 - Added Docker deployment path for AI server migration:
   - root server `Dockerfile`
   - UI nginx `packages/ui/Dockerfile`
@@ -63,6 +72,11 @@ Overall estimated completion: 38%
   - UI LAN: `http://192.168.1.104:5174/`
 - Runtime LLM settings API verified:
   - `GET http://localhost:3010/api/settings/llm` returns current LM Studio routing config
+- `comdee-001` template added; restart backend to load it into EmpireMap.
+- `comdee-001` verified in live EmpireRoom snapshot:
+  - Active companies: 3
+  - Total agents: 10
+  - Comdee agents: 4
 - Temporary server on port `3010` verified `empire_snapshot`:
   - `content-001`, 2 agents
   - `ecom-001`, 4 agents
