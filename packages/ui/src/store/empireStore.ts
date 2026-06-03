@@ -13,6 +13,7 @@ import { subscribeWithSelector } from 'zustand/middleware'
 export type AgentStatus = 'idle' | 'thinking' | 'working' | 'error' | 'fired'
 export type CompanyStatus = 'active' | 'alert' | 'paused'
 export type ViewMode = 'cartoon' | 'technical'
+export type AppView = 'empire_map' | 'company_floor' | 'hr_panel' | 'boss_command' | 'shadow_pm' | 'settings'
 
 export interface AgentData {
   id: string
@@ -55,7 +56,7 @@ export interface EmpireState {
 
   // UI State
   viewMode: ViewMode
-  currentView: 'empire_map' | 'company_floor' | 'hr_panel' | 'boss_command' | 'shadow_pm'
+  currentView: AppView
 
   // Actions
   setCompanies: (companies: Record<string, CompanyData>) => void
@@ -67,7 +68,7 @@ export interface EmpireState {
   removeApproval: (approvalId: string) => void
   setConnectionStatus: (status: EmpireState['connectionStatus']) => void
   setViewMode: (mode: ViewMode) => void
-  setCurrentView: (view: EmpireState['currentView']) => void
+  setCurrentView: (view: AppView) => void
 }
 
 // ── Store ─────────────────────────────────────────────────────

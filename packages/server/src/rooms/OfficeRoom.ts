@@ -1,10 +1,10 @@
 import { Room, type Client } from 'colyseus'
 import { OfficeRoomState, AgentStateSchema } from './OfficeRoomState'
 import { Agent } from '@empire/agent-engine'
-import { LLMClient } from '@empire/llm-client'
 import { SQLiteMemory } from '@empire/memory'
 import type { CompanyConfig } from '@empire/agent-engine'
 import { loadCompanyTemplate } from '../templates/CompanyTemplateLoader'
+import { llmSettingsStore } from '../config/LLMSettings'
 
 /**
  * OfficeRoom — Colyseus room สำหรับ 1 company
@@ -12,9 +12,10 @@ import { loadCompanyTemplate } from '../templates/CompanyTemplateLoader'
  */
 export class OfficeRoom extends Room<OfficeRoomState> {
   private agents: Map<string, Agent> = new Map()
-  private llmClient!: LLMClient
+  private llmClient!: ReturnType<typeof llmSettingsStore.createClient>
   private memory!: SQLiteMemory
   private thinkIntervals: Map<string, ReturnType<typeof setInterval>> = new Map()
+  private llmSettingsUpdatedAt: string = ''
 
   private readonly thinkCooldownMs: number =
     parseInt(process.env['THINK_COOLDOWN_MS'] ?? '5000', 10)
@@ -30,11 +31,7 @@ export class OfficeRoom extends Room<OfficeRoomState> {
     this.state.companyId = company.companyId
     this.state.companyName = company.name
 
-    this.llmClient = new LLMClient({
-      baseURL: process.env['LLM_BASE_URL'] ?? 'http://127.0.0.1:1234/v1',
-      model: process.env['LLM_DEFAULT_MODEL'] ?? 'local/gemma-4b',
-      apiKey: process.env['OPENAI_API_KEY'] ?? 'lm-studio',
-    })
+    this.refreshLLMClient()
 
     this.memory = new SQLiteMemory()
 
@@ -86,6 +83,7 @@ export class OfficeRoom extends Room<OfficeRoomState> {
     const schema = this.state.agents.get(agentId)
     if (!schema) return
 
+    this.refreshLLMClient()
     schema.status = 'thinking'
 
     const result = await agent.think(`ทำงานประจำของ ${agent.name} ในฐานะ ${agent.state.config.role}`)
@@ -100,6 +98,7 @@ export class OfficeRoom extends Room<OfficeRoomState> {
     const schema = this.state.agents.get(agentId)
     if (!agent || !schema) return
 
+    this.refreshLLMClient()
     schema.status = 'working'
     schema.currentTask = command
 
@@ -113,6 +112,7 @@ export class OfficeRoom extends Room<OfficeRoomState> {
     const schema = this.state.agents.get(agentId)
     if (!agent || !schema) return
 
+    this.refreshLLMClient()
     schema.status = 'working'
     schema.currentTask = `กำลังเรียน: ${skillName}`
 
@@ -162,6 +162,18 @@ export class OfficeRoom extends Room<OfficeRoomState> {
         tasksCompleted: agent.tasksCompleted,
       })),
       activeAgentCount: this.state.activeAgentCount,
+    }
+  }
+
+  private refreshLLMClient(): void {
+    const settings = llmSettingsStore.get()
+    if (settings.updatedAt === this.llmSettingsUpdatedAt && this.llmClient) return
+
+    this.llmClient = llmSettingsStore.createClient()
+    this.llmSettingsUpdatedAt = settings.updatedAt
+
+    for (const agent of this.agents.values()) {
+      agent.setLLMClient(this.llmClient)
     }
   }
 }

@@ -6,14 +6,16 @@ import { BossCommandPanel } from './BossCommand/BossCommandPanel.js'
 import { ShadowPMDashboard } from './ShadowPMDash/ShadowPMDashboard.js'
 import { CompanyFloorView } from './CompanyFloor/CompanyFloorView.js'
 import { connectEmpireRoom } from '../net/empireClient.js'
+import { SettingsView } from './Settings/SettingsView.js'
 
 /**
  * ViewMode toggle — 🎮 Cartoon / 📊 Technical
  */
 function ViewModeToggle() {
-  const { viewMode, setViewMode } = useEmpireStore()
+  const { viewMode, setViewMode, setCurrentView } = useEmpireStore()
   return (
     <div className="view-mode-toggle">
+      <button onClick={() => setCurrentView('settings')}>Settings</button>
       <button
         className={viewMode === 'cartoon' ? 'active' : ''}
         onClick={() => setViewMode('cartoon')}
@@ -49,6 +51,7 @@ export function AppRouter() {
     hr_panel: <HRPanel />,
     boss_command: <BossCommandPanel />,
     shadow_pm: <ShadowPMDashboard />,
+    settings: <SettingsView />,
   }
 
   return (

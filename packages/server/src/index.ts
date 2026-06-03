@@ -7,6 +7,7 @@ import { monitor } from '@colyseus/monitor'
 import { OfficeRoom } from './rooms/OfficeRoom'
 import { EmpireRoom } from './rooms/EmpireRoom'
 import type { AgentAction } from '@empire/agent-engine'
+import { llmSettingsStore, type LLMSettingsInput } from './config/LLMSettings'
 
 const PORT = parseInt(process.env['SERVER_PORT'] ?? '3000', 10)
 
@@ -51,6 +52,36 @@ app.post('/agent/action', (req, res) => {
   res.json({ ok: true, queued: true, agentId, action })
 })
 
+// ── Runtime LLM Settings ─────────────────────────────────────
+app.get('/api/settings/llm', (_req, res) => {
+  res.json(llmSettingsStore.getPublic())
+})
+
+app.put('/api/settings/llm', (req, res) => {
+  try {
+    const settings = llmSettingsStore.update(req.body as LLMSettingsInput)
+    res.json(settings)
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err)
+    res.status(400).json({ error: message })
+  }
+})
+
+app.post('/api/settings/llm/test', async (_req, res) => {
+  const client = llmSettingsStore.createClient()
+  const result = await client.chat([
+    { role: 'system', content: 'ตอบกลับสั้น ๆ เป็นภาษาไทย' },
+    { role: 'user', content: 'ทดสอบการเชื่อมต่อ LLM ตอบว่า พร้อมทำงาน' },
+  ], { maxTokens: 64, temperature: 0.1 })
+
+  if (result.ok) {
+    res.json({ ok: true, reply: result.value })
+    return
+  }
+
+  res.status(502).json({ ok: false, error: result.error })
+})
+
 // Root endpoint
 app.get('/', (_req, res) => {
   res.json({
@@ -58,6 +89,7 @@ app.get('/', (_req, res) => {
     status: 'ok',
     endpoints: {
       health: '/health',
+      llmSettings: '/api/settings/llm',
       colyseusMonitor: '/colyseus',
       webhook: '/agent/action',
     },

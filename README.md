@@ -75,6 +75,21 @@ packages/
 
 สลับ environment = เปลี่ยนแค่ `.env` ไฟล์เดียว ไม่ต้องแก้โค้ด
 
+Runtime AI model settings:
+
+- Open the app UI, then click `Settings`.
+- Choose LM Studio, Ollama, LiteLLM Proxy, OpenAI, or Custom.
+- Save to update backend routing for new agent rooms.
+- Test to call the configured model through the same backend LLM client path.
+
+Direct API:
+
+- `GET /api/settings/llm`
+- `PUT /api/settings/llm`
+- `POST /api/settings/llm/test`
+
+For Anthropic/Gemini or mixed cloud/local fallback, route through LiteLLM and set the Settings base URL to the LiteLLM OpenAI-compatible endpoint.
+
 ## 📖 Docs
 
 - [Project Brain / Context Capsule](./project-brain/CONTEXT.md)

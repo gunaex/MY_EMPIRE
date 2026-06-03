@@ -1,7 +1,7 @@
 # MY_EMPIRE Progress Update
 
 Last updated: 2026-06-03
-Session focus: Phase 1 live multi-company wiring + GitHub repo setup + Docker deployment prep + local test run
+Session focus: Phase 1 live multi-company wiring + GitHub repo setup + Docker deployment prep + local test run + runtime LLM settings
 
 ## Phase Progress
 
@@ -14,6 +14,7 @@ Session focus: Phase 1 live multi-company wiring + GitHub repo setup + Docker de
 | Phase 4 Shadow PM | 20% | Started | No direct Shadow PM changes this session |
 | Phase 5 Polish & Scale | 5% | Not started | Build cleanup helps future polish but no product polish pass yet |
 | Deployment | 55% | In progress | Added Dockerfiles, Compose hardening, AI server env networking, and deployment guide |
+| Runtime LLM Settings | 65% | In progress | Added backend settings API, persisted routing config, frontend Settings view, and test endpoint |
 
 Overall estimated completion: 38%
 
@@ -23,6 +24,13 @@ Overall estimated completion: 38%
 - Confirmed the GitHub repo is reachable and currently has no remote branches.
 - Created and pushed initial project scaffold and Docker deployment commits to GitHub.
 - Confirmed local test servers are running for manual browser testing.
+- Added runtime AI model settings:
+  - Backend `GET /api/settings/llm`
+  - Backend `PUT /api/settings/llm`
+  - Backend `POST /api/settings/llm/test`
+  - Persisted settings at `./data/llm-settings.json` by default
+  - Frontend `Settings` view with LM Studio, Ollama, LiteLLM, OpenAI, and Custom presets
+  - OfficeRoom now creates LLM clients from the shared runtime settings store
 - Added Docker deployment path for AI server migration:
   - root server `Dockerfile`
   - UI nginx `packages/ui/Dockerfile`
@@ -52,6 +60,8 @@ Overall estimated completion: 38%
   - Colyseus monitor: `http://localhost:3010/colyseus`
   - UI local: `http://localhost:5174/`
   - UI LAN: `http://192.168.1.104:5174/`
+- Runtime LLM settings API verified:
+  - `GET http://localhost:3010/api/settings/llm` returns current LM Studio routing config
 - Temporary server on port `3010` verified `empire_snapshot`:
   - `content-001`, 2 agents
   - `ecom-001`, 4 agents
@@ -66,6 +76,7 @@ Overall estimated completion: 38%
 3. Investigate why Colyseus schema state patches are empty on the JS client and decide whether to keep snapshots as the stable sync protocol.
 4. Add server integration tests for template loading, empire snapshot, and office snapshot.
 5. Move to Phase 2 by executing one scheduled agent task and surfacing the result in UI.
+6. Add auth before exposing Settings over the internet.
 
 ## Next Action
 

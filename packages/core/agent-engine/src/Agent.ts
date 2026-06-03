@@ -43,6 +43,10 @@ export class Agent {
     return this.state.config.name
   }
 
+  setLLMClient(llmClient: LLMClient): void {
+    this.llmClient = llmClient
+  }
+
   /**
    * Main think cycle — เรียกโดย BullMQ scheduler
    */
