@@ -20,8 +20,26 @@ npm run dev
 
 หรือรันทั้งหมดด้วย Docker:
 ```bash
-docker-compose up
+cp .env.notebook .env
+docker compose up -d --build
 ```
+
+If your server uses the legacy Compose binary, replace `docker compose` with `docker-compose`.
+
+AI Server deployment:
+
+```bash
+cp .env.server .env
+docker compose up -d --build
+docker compose ps
+```
+
+Local network access:
+
+- UI: `http://<AI_SERVER_LAN_IP>:5173`
+- API / Colyseus: `http://<AI_SERVER_LAN_IP>:3000`
+
+Docker containers use `restart: unless-stopped`, so after the server reboots they start again automatically once Docker starts.
 
 ## 📁 Structure
 

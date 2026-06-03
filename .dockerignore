@@ -1,0 +1,14 @@
+node_modules
+dist
+build
+coverage
+.git
+.env
+data
+*.sqlite
+*.log
+npm-debug.log*
+packages/ui/dist
+packages/server/dist
+packages/**/src/*.js
+packages/**/src/*.js.map
